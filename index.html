@@ -1,6 +1,4 @@
-Here's the complete and corrected HTML code for your MoneyWise landing page, including the fix for the incomplete AI Assistant screenshot section:
 
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,7 +94,7 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 20% 20%, rgba(120, 44, 191, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 60%, rgba(123, 44, 191, 0.2) 0%, transparent 50%);
@@ -346,6 +344,29 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
             line-height: 1.6;
         }
 
+        /* Horizontal Scroll Containers - NEW */
+        .horizontal-scroll-container {
+            display: flex;
+            gap: 30px; /* Adjust gap as needed */
+            overflow-x: auto;
+            padding: 20px 0; /* Add padding to make scroll visible */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            margin-top: 60px; /* Match spacing for other sections */
+        }
+
+        .horizontal-scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        /* Specific styles for cards within horizontal scrolls */
+        .screenshots-container .screenshot-card,
+        .testimonial-grid .testimonial-card,
+        .steps-container .step-card {
+            min-width: 280px; /* Ensure cards have a minimum width for scrolling */
+            flex-shrink: 0; /* Prevent cards from shrinking */
+        }
+
         /* Screenshots Section */
         .screenshots {
             padding: 120px 0;
@@ -353,20 +374,11 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
         }
 
         .screenshots-container {
-            display: flex;
-            gap: 30px;
-            overflow-x: auto;
-            padding: 20px 0;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .screenshots-container::-webkit-scrollbar {
-            display: none;
+            /* Existing styles, just ensure they apply the horizontal-scroll-container properties */
         }
 
         .screenshot-card {
-            min-width: 200px;
+            min-width: 200px; /* Kept original min-width for screenshots */
             height: 400px;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             border-radius: 25px;
@@ -537,10 +549,7 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
         }
 
         .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
+            /* Now uses horizontal-scroll-container properties */
         }
 
         .testimonial-card {
@@ -550,6 +559,8 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
             padding: 40px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
+            min-width: 300px; /* Ensure minimum width for scrolling */
+            flex-shrink: 0;
         }
 
         .testimonial-card:hover {
@@ -599,15 +610,14 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
         }
 
         .steps-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
+            /* Now uses horizontal-scroll-container properties */
         }
 
         .step-card {
             text-align: center;
             position: relative;
+            min-width: 250px; /* Ensure minimum width for scrolling */
+            flex-shrink: 0;
         }
 
         .step-number {
@@ -735,7 +745,32 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
             .cta h2 {
                 font-size: 2rem;
             }
+
+            /* For smaller screens, ensure these sections scroll horizontally */
+            .testimonial-grid,
+            .steps-container {
+                display: flex; /* Override grid display */
+                overflow-x: auto;
+                padding: 20px 0;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                margin-top: 60px;
+                gap: 30px;
+                flex-wrap: nowrap; /* Prevent wrapping */
+            }
+
+            .testimonial-grid::-webkit-scrollbar,
+            .steps-container::-webkit-scrollbar {
+                display: none;
+            }
+
+            .testimonial-card,
+            .step-card {
+                min-width: 280px; /* Adjust as needed for card size on mobile */
+                flex-shrink: 0;
+            }
         }
+
 
         /* Scroll Animations */
         .fade-in {
@@ -866,7 +901,7 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
     <section class="screenshots" id="screenshots">
         <div class="container">
             <h2 class="section-title fade-in">App Screenshots</h2>
-            <div class="screenshots-container">
+            <div class="screenshots-container horizontal-scroll-container">
                 <div class="screenshot-card">
                     <div class="screenshot-content">
                         <div class="screen-header">
@@ -1035,7 +1070,7 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
     <section class="testimonials" id="testimonials">
         <div class="container">
             <h2 class="section-title fade-in">What Our Users Say</h2>
-            <div class="testimonial-grid">
+            <div class="testimonial-grid horizontal-scroll-container">
                 <div class="testimonial-card fade-in">
                     <div class="testimonial-text">
                         "MoneyWise has transformed how I manage my finances. The AI assistant is a game-changer for budgeting. Highly recommend!"
@@ -1072,6 +1107,18 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
                         </div>
                     </div>
                 </div>
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-text">
+                        "The offline capability gives me peace of mind about my data. And the UI? Absolutely stunning and easy to use."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S.M.</div>
+                        <div class="author-info">
+                            <h4>Sameer Mehta</h4>
+                            <p>Marketing Manager, Pune</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1081,7 +1128,7 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
     <section class="how-it-works">
         <div class="container">
             <h2 class="section-title fade-in">How MoneyWise Works</h2>
-            <div class="steps-container">
+            <div class="steps-container horizontal-scroll-container">
                 <div class="step-card fade-in">
                     <div class="step-number">1</div>
                     <h3>Download & Setup</h3>
@@ -1101,6 +1148,11 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
                     <div class="step-number">4</div>
                     <h3>Achieve Goals</h3>
                     <p>Set financial goals and track your progress. MoneyWise empowers you to reach financial freedom.</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-number">5</div>
+                    <h3>Review & Refine</h3>
+                    <p>Regularly review your reports and adjust your budget for continuous financial improvement.</p>
                 </div>
             </div>
         </div>
@@ -1187,4 +1239,3 @@ Here's the complete and corrected HTML code for your MoneyWise landing page, inc
     </script>
 </body>
 </html>
-```
